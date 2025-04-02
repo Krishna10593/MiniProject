@@ -1,0 +1,72 @@
+<h1 *ngIf="!id">Create-Employee</h1>
+<h1 *ngIf="id">Update-Employee</h1>
+<form [formGroup]="employeesForm">
+<label>Create Employee</label>
+<label>Name: </label>
+<input type="text" formControlName="name"><br>
+<label>Gender: </label>
+<input type="radio" formControlName="gender" name="gender" value="male">
+<label>Male</label>
+<input type="radio" formControlName="gender" name="gender" value="female">
+<label>Female</label><br>
+<label>Company: </label>
+<input type="text" formControlName="company"><br>
+<label>Role: </label>
+<input type="text" formControlName="role"><br>
+<label>Package: </label>
+<input type="number" formControlName="package"><br>
+<label>Email: </label>
+<input type="text" formControlName="email"><br>
+<label>DOB: </label>
+<input type="date" formControlName="dob"><br>
+<div formGroupName="address">
+    
+    <label>City:</label>
+    <input type="text" formControlName="city"><br>
+    <label>State:</label>
+    <input type="text" formControlName="state"><br>
+    <label>Pincode:</label>
+    <input type="text" formControlName="pincode"><br>
+</div>
+
+
+
+
+<!-- dynamic form for different work modes -->
+<label>WorkMode:</label>
+<input type="radio" name="workmode" formControlName="workmode" value="remote" >
+<label>Remote</label>
+<input type="radio" name="workmode" formControlName="workmode" value="office">
+<label>Office</label>
+
+<div *ngIf="employeesForm.get('workmode')?.value=='remote'">
+    <label>WifiBill: </label>
+    <input type="number" formControlName="wifibill"><br>
+</div>
+<div *ngIf="employeesForm.get('workmode')?.value=='office'">
+    <label>TravelFee: </label>
+    <input type="number" formControlName="travelfee">
+</div><br>
+
+<label>Hikes: </label>
+<button (click)="addhike()" class="btn btn-warning">Add Hike</button><br>
+
+<div formGroupName="hikes">
+<div *ngFor="let hike of hikesFormArray.controls; let i=index">
+<div formGroupName="{{i}}">
+    <h2>hike{{i+1}}</h2>
+    <label>Year:</label>
+    <input type="number" formControlName="year"><br>
+    <label>Percentage: </label>
+    <input type="number" formControlName="percentage"><br>
+    <button (click)="deletehike(i)" class="btn btn-danger">Delete Hike</button>
+</div>
+</div>
+</div>
+<button (click)="create()">Submit</button><br>
+
+</form>
+
+
+
+
