@@ -1,0 +1,13 @@
+
+<div class="main">
+    <div class="left">
+        <h5>Dashboard</h5>
+        <button routerLink="/dashboard/home">Home</button><br><br>
+        <button routerLink="/dashboard/employees" >Employees</button><br><br>
+        <button class="btn btn-danger" (click)="logout()">Logout</button>
+        
+    </div>
+    <div class="right">
+        <router-outlet></router-outlet>
+    </div>
+</div>
