@@ -1,0 +1,93 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<div class="top">
+<!-- Filter -->
+
+<input type="text" placeholder="Search here to filter" [(ngModel)]="term" (keyup)="filter()" >
+
+<!-- Sort -->
+<select [(ngModel)]="column">
+    <option>name</option>
+    <option>gender</option>
+    <option>company</option>
+    <option>role</option>
+    <option>package</option>
+    <option>email</option>
+    <option>dob</option>
+    <option>workMode</option>
+</select>
+<select [(ngModel)]="order">
+    <option>asc</option>
+    <option>desc</option>    
+</select>
+<button (click)="sort()" class="btn btn-secondary">Sort</button>
+
+<!-- Pagination -->
+<select [(ngModel)]="limit">
+<option>10</option>
+<option>20</option>
+<option>30</option>
+</select>
+<select [(ngModel)]="page">
+    <option>1</option>
+    <option>2</option>
+</select>
+<button (click)="pagination()" class="btn btn-info">Pagination</button>
+
+<!-- Emplyee Creation -->
+
+<button routerLink="/dashboard/create-employee" >CreateEmployee</button>
+
+<!-- Deatis of each employee -->
+
+
+</div>
+
+
+
+<div class="bottom">
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th>S.No.</th>
+            <th>Emp.Name</th>
+            <th>Gender</th>
+            <th>Comp.Name</th>
+            <th>Role</th>
+            <th>Package</th>
+            <th>Email:</th>
+            <th>DOB</th>
+            <th>Workmode</th>
+            <th>Action</th>
+          
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let employee of employees; let i=index">
+            <td>{{i+1}}</td>
+            <td>{{employee.name}}</td>
+            <td>{{employee.gender}}</td>
+            <td>{{employee.company}}</td>
+            <td>{{employee.role}}</td>        
+            <td [ngStyle]="{'background-color':employee.package<900000?'red':'green'}">{{employee.package}}</td>        
+            <td>{{employee.email}}</td>
+            <td>{{employee.dob}}</td>
+            <td>{{employee.workMode}}</td> 
+            <td>
+                <button routerLink="/dashboard/employee-details/{{employee.id}}" >View</button>
+            </td>
+            <td>
+                <button routerLink="/dashboard/edit-employee/{{employee.id}}" >Edit</button>
+            </td>
+            <td>
+                <!-- delete record -->
+                <button class="btn btn-danger" (click)="delete(employee.id)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</div>
